@@ -5,7 +5,8 @@
 **Warning: Any existing images inside the output dir will be uploaded to the webhook. I suggest that you either clear out the folders, or be prepared for all of your images to be uploaded to the webhook.**
 
 - Local install of [stable-diffusion-webui](https://github.com/AUTOMATIC1111/stable-diffusion-webui)
-- In the webui, navigate to `Settings -> 
+- In the webui, navigate to `Settings -> Saving images/grids -> Enable 'Save text information about generation parameters as chunks to png files' -> Apply settings`.
+- **Warning: If you do not do the previous step, the prompt content will not be sent to the webhook.**
 - Libraries: **os, time, requests.**
 - Also run **pip install discord-webhook**
 
