@@ -7,7 +7,7 @@ IMAGES_PARENT_FOLDER = "stable-diffusion-webui/outputs/txt2img-images" #Parent f
 IMAGE_FILE_EXT = (".jpg", ".jpeg", ".png")
 TXT_FILE_EXT = (".txt",)
 FILE_LIST_PATH = os.path.join(IMAGES_PARENT_FOLDER, "file_list.txt") # Path to the file list text file
-
+MAX_MESSAGE_LENGTH = 1950 # Maximum length of the Discord message content
 
 def send_discord_webhook(image_path, txt_path=None):
     files = {"image": open(image_path, "rb")}
@@ -15,14 +15,17 @@ def send_discord_webhook(image_path, txt_path=None):
     if txt_path:
         with open(txt_path, "r") as f:
             content = f.read()
+            if len(content) > MAX_MESSAGE_LENGTH:
+                content = content[:MAX_MESSAGE_LENGTH] 
             message = f"```\n{content}\n```"
 
-    r = requests.post(DISCORD_WEBHOOK_URL, data={"content": message}, files=files)
-    if r.status_code == 200:
-        print(f"New image uploaded: {image_path}")
-    else:
-        print(f"Error uploading image: {r.text}")
-
+            if len(message) < MAX_MESSAGE_LENGTH:
+                message = message[:MAX_MESSAGE_LENGTH]
+        r = requests.post(DISCORD_WEBHOOK_URL, data={"content": message}, files=files)
+        if r.status_code == 200:
+            print(f"New image uploaded: {image_path}")
+        else:
+            print(f"Error uploading image: {r.text}")
 
 
 def update_file_list():
