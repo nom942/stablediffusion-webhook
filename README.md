@@ -10,6 +10,8 @@
 
 ### Setup
 
+Before anything else, download `run_webhook.bat` and place it in the main dir.
+
 1. Download webhook.py
 2. Right click -> edit file.
 3. Paste your Discord webhook URL into DISCORD_WEBHOOK_URL, and paste the path to txt2img-images in IMAGES_PARENT_FOLDER.
@@ -19,8 +21,8 @@
 7. Insert the following after `%PYTHON% launch.py %*` but before `pause`.
 
 ```
-echo Running webhook.py 
-%PYTHON% webhook.py
+echo Running webhook.py
+call run_webhook.bat
 ```
 
 8. Run webui.bat
