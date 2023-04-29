@@ -33,7 +33,7 @@ echo Running launch.py
 
 ### Explanation
 
-The first time the script is run, it will create a file in the parent dir called `file_list.txt`. It will run through all the files in the parent folder's subdirectories, and collect all file names. These file names will be added to the txt file, and every time the script runs, it will grab all of the file names and compare them to the existing file names in the txt file. If any new files exist, it will add them to the txt file and upload them to the webhook. If file names exist in the txt file, but not any subdirectories, they will be removed from the txt file.
+The first time the script is run, it will create a file in the parent dir called `file_list.txt`. It will run through all the files in the parent folder's subdirectories, and collect all file names. These file names will be added to the txt file, and every time the script runs, it will grab all of the file names and compare them to the existing file names in the txt file. If any new files exist, it will add them to the txt file and upload them to the webhook. It will also check if any text files exist with the same name as the image file. If the text file exists (containing the prompt info) it will send that to the webhook as well. If file names exist in the txt file, but not any subdirectories, they will be removed from the txt file.
 
 - **DISCORD_WEBHOOK_URL:** The URL of the Discord webhook.
 - **IMAGES_PARENT_FOLDER:** The parent folder where the images will be uploaded to.
