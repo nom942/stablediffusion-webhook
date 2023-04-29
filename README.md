@@ -5,6 +5,7 @@
 **Warning: Any existing images inside the output dir will be uploaded to the webhook. I suggest that you either clear out the folders, or be prepared for all of your images to be uploaded to the webhook.**
 
 - Local install of [stable-diffusion-webui](https://github.com/AUTOMATIC1111/stable-diffusion-webui)
+- In the webui, navigate to `Settings -> 
 - Libraries: **os, time, requests.**
 - Also run **pip install discord-webhook**
 
