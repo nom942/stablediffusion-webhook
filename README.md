@@ -1,1 +1,38 @@
+## Stable Diffusion Discord Webhook
+
+### Requirements
+
+**Warning: Any existing images inside the output dir will be uploaded to the webhook. I suggest that you either clear out the folders, or be prepared for all of your images to be uploaded to the webhook.**
+
+- Local install of [stable-diffusion-webui](https://github.com/AUTOMATIC1111/stable-diffusion-webui)
+- Libraries: **os, time, requests.**
+- Also run **pip install discord-webhook**
+
+### Setup
+
+1. Download webhook.py
+2. Right click -> edit file.
+3. Paste your Discord webhook URL into DISCORD_WEBHOOK_URL, and paste the path to txt2img-images in IMAGES_PARENT_FOLDER.
+4. Navigate to the main stable-diffusion-webui folder.
+5. Place webhook.py in this directory.
+6. Right click on webui.bat -> edit file.
+7. Insert the following after `%PYTHON% launch.py %*` but before `pause`.
+
+```
+echo Running webhook.py 
+%PYTHON% webhook.py
+```
+
+8. Run webui.bat
+9. All images generated in txt2img-images will be uploaded to the webhook.
+
+### Explanation
+
+The first time the script is run, it will create a file in the parent dir called `file_list.txt`. It will run through all the files in the parent folder's subdirectories, and collect all file names. These file names will be added to the txt file, and every time the script runs, it will grab all of the file names and compare them to the existing file names in the txt file. If any new files exist, it will add them to the txt file and upload them to the webhook. If file names exist in the txt file, but not any subdirectories, they will be removed from the txt file.
+
+- **DISCORD_WEBHOOK_URL:** The URL of the Discord webhook.
+- **IMAGES_PARENT_FOLDER:** The parent folder where the images will be uploaded to.
+- **IMAGE_FILE_EXT:** The file extension of the images to upload.
+- **FILE_LIST_PATH:** The file path to the file list text file.
+
 
