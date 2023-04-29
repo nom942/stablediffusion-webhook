@@ -6,7 +6,7 @@
 
 - Local install of [stable-diffusion-webui](https://github.com/AUTOMATIC1111/stable-diffusion-webui)
 - In the webui, navigate to `Settings -> Saving images/grids -> Enable 'Create a text file next to every image with generation parameters.' -> Apply settings`.
-- **Warning: If you do not do the previous step, the prompt content will not be sent to the webhook.**
+- **Warning: If you do not do the previous step, the prompt content and the image will not be sent to the webhook.**
 - Libraries: **os, time, requests.**
 - Also run **pip install discord-webhook**
 
