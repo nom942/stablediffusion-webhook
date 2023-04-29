@@ -10,19 +10,20 @@
 
 ### Setup
 
-Before anything else, download `run_webhook.bat` and place it in the main dir.
-
 1. Download webhook.py
 2. Right click -> edit file.
 3. Paste your Discord webhook URL into DISCORD_WEBHOOK_URL, and paste the path to txt2img-images in IMAGES_PARENT_FOLDER.
 4. Navigate to the main stable-diffusion-webui folder.
 5. Place webhook.py in this directory.
 6. Right click on webui.bat -> edit file.
-7. Insert the following after `%PYTHON% launch.py %*` but before `pause`.
+7. Go down to `:launch` and delete everything between that and `pause`. Then paste this into that spot.
 
 ```
 echo Running webhook.py
-call run_webhook.bat
+start "" %PYTHON% webhook.py
+
+echo Running launch.py 
+%PYTHON% launch.py %*
 ```
 
 8. Run webui.bat
