@@ -2,19 +2,27 @@ import os
 import time
 import requests
 
-DISCORD_WEBHOOK_URL = "" #Discord webhook here
-IMAGES_PARENT_FOLDER = "stable-diffusion-webui/outputs/txt2img-images" #Parent txt2img-images folder here, not the subdirectories
+DISCORD_WEBHOOK_URL = "" #Webhook here
+IMAGES_PARENT_FOLDER = "stable-diffusion-webui/outputs/txt2img-images" #Parent folder here (txt2img-images)
 IMAGE_FILE_EXT = (".jpg", ".jpeg", ".png")
+TXT_FILE_EXT = (".txt",)
 FILE_LIST_PATH = os.path.join(IMAGES_PARENT_FOLDER, "file_list.txt") # Path to the file list text file
 
 
-def send_discord_webhook(image_path):
-    with open(image_path, "rb") as f:
-        r = requests.post(DISCORD_WEBHOOK_URL, files={"image": f})
-        if r.status_code == 200:
-            print(f"New image uploaded: {image_path}")
-        else:
-            print(f"Error uploading image: {r.text}")
+def send_discord_webhook(image_path, txt_path=None):
+    files = {"image": open(image_path, "rb")}
+    message = None
+    if txt_path:
+        with open(txt_path, "r") as f:
+            content = f.read()
+            message = f"```\n{content}\n```"
+
+    r = requests.post(DISCORD_WEBHOOK_URL, data={"content": message}, files=files)
+    if r.status_code == 200:
+        print(f"New image uploaded: {image_path}")
+    else:
+        print(f"Error uploading image: {r.text}")
+
 
 
 def update_file_list():
@@ -22,7 +30,7 @@ def update_file_list():
     existing_files = []
     for root, dirs, files in os.walk(IMAGES_PARENT_FOLDER):
         for file in files:
-            if file.endswith(IMAGE_FILE_EXT):
+            if file.endswith(IMAGE_FILE_EXT) or file.endswith(TXT_FILE_EXT):
                 existing_files.append(file)
 
     # Remove files that are in the file list but no longer exist
@@ -47,10 +55,13 @@ def check_for_new_images():
     for root, dirs, files in os.walk(IMAGES_PARENT_FOLDER):
         for file in files:
             if file.endswith(IMAGE_FILE_EXT) and file not in existing_files:
-                file_path = os.path.join(root, file)
-                send_discord_webhook(file_path)
-                # Add the new file to the list of existing files
-                existing_files.append(file)
+                image_path = os.path.join(root, file)
+                # Check for matching txt file
+                txt_file = file.rsplit(".", 1)[0] + ".txt"
+                txt_path = os.path.join(root, txt_file) if txt_file in files else None
+                send_discord_webhook(image_path, txt_path)
+                # Add the new files to the list of existing files
+                existing_files.extend([file, txt_file])
     
     # Update the file list
     with open(FILE_LIST_PATH, "w") as f:
