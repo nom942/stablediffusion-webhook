@@ -2,7 +2,7 @@
 
 ### Requirements
 
-**Warning: Any existing images inside the output dir will be uploaded to the webhook. I suggest that you either clear out the folders, or be prepared for all of your images to be uploaded to the webhook.**
+**Warning: Any existing images inside the output dir may be uploaded to the webhook. I suggest that you either clear out the folders, or be prepared for all of your images to be uploaded to the webhook.**
 
 - Local install of [stable-diffusion-webui](https://github.com/AUTOMATIC1111/stable-diffusion-webui)
 - In the webui, navigate to `Settings -> Saving images/grids -> Enable 'Create a text file next to every image with generation parameters.' -> Apply settings`.
@@ -14,7 +14,7 @@
 
 1. Download webhook.py
 2. Right click -> edit file.
-3. Paste your Discord webhook URL into DISCORD_WEBHOOK_URL, and paste the path to txt2img-images in IMAGES_PARENT_FOLDER.
+3. Paste your Discord webhook URL into DISCORD_WEBHOOK_URL, and paste the path to txt2img-images in IMAGES_PARENT_FOLDER. (I haven't tested changing the parent folder to the whole output dir, but you are welcome to give it a whirl. As it is, this script is written to upload txt2img-images output).
 4. Navigate to the main stable-diffusion-webui folder.
 5. Place webhook.py in this directory.
 6. Right click on webui.bat -> edit file.
