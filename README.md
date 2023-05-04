@@ -2,8 +2,6 @@
 
 ### Requirements
 
-**Warning: Any existing images inside the output dir may be uploaded to the webhook. I suggest that you either clear out the folders, or be prepared for all of your images to be uploaded to the webhook.**
-
 - Local install of [stable-diffusion-webui](https://github.com/AUTOMATIC1111/stable-diffusion-webui)
 - In the webui, navigate to `Settings -> Saving images/grids -> Enable 'Create a text file next to every image with generation parameters.' -> Apply settings`.
 - **Warning: If you do not do the previous step, the prompt content and the image will not be sent to the webhook.**
