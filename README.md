@@ -1,7 +1,6 @@
 ## Stable Diffusion Discord Webhook
 
-[![Github All Releases](https://img.shields.io/github/downloads/real-human-dev/stablediffusion-webhook/total.svg)]()
-
+![Github All Releases](https://img.shields.io/github/downloads/real-human-dev/stablediffusion-webhook/total.svg) 
 
 ### Requirements
 
