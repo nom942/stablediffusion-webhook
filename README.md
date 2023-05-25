@@ -1,7 +1,4 @@
 ## Stable Diffusion Discord Webhook
-
-![Github All Releases](https://img.shields.io/github/downloads/real-human-dev/stablediffusion-webhook/total.svg) 
-
 ### Requirements
 
 - Local install of [stable-diffusion-webui](https://github.com/AUTOMATIC1111/stable-diffusion-webui)
